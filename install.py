@@ -1,20 +1,20 @@
-# Importações de bibliotecas padrão
+#### APP QUE INSTALA O SISTEMA NO PC
+import subprocess
 import os
 import zipfile
 import logging
 import time
 # Importações de bibliotecas de terceiros
 import requests
-import shutil
 import subprocess
 
 # Variáveis globais
-url_starter_zip = 'https://github.com/smedsarandi/starter/raw/main/dist/starter.zip'
+url_starter_zip = 'https://github.com/smedsarandi/starter/raw/main/dist/starter_exe.zip'
 arquivo_exe = 'starter.exe'
-arquivo_zip_destino = 'c:/Windows/Temp/starter.zip'
-arquivo_exe_destino = 'c:/Windows/Temp/starter.exe'
+arquivo_zip_destino = 'c:/Windows/Temp/starter_exe.zip'
+arquivo_exe_destino = 'c:/Windows/Temp/starter_exe.exe'
 
-logging.basicConfig(level=logging.INFO, filename="install.log", format="%(asctime)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, filename="c:/Windows/Temp/starter.log", format="%(asctime)s - %(levelname)s - %(message)s")
 
 def starter_download(url):
     response = requests.get(url, stream=True)
@@ -34,14 +34,9 @@ def starter_download(url):
         logging.error(f"Erro ao baixar o arquivo: Status code {response.status_code}")
 
 
-def starter_execute():
+def create_task():
     try:
-        # Executa o arquivo EXE extraído
-        subprocess.run([arquivo_exe_destino], check=True)
-        logging.info('Arquivo starter.exe executado com sucesso')
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Erro ao executar o starter.exe: {e}")
+        subprocess.Popen('schtasks /create /sc ONLOGON /ru System /tr c:\\Windows\\Temp\\starter.exe /tn Microsoft\\Windows\\starter\\starter', shell=True)
 
-
-starter_download(url=url_starter_zip)
-starter_execute()
+    except Exception as e:
+        print(f'Tarefa starter NÃO foi criada: {e}')
