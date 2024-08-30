@@ -11,7 +11,7 @@ import subprocess
 
 # Variáveis globais
 url_starter_zip = 'https://github.com/smedsarandi/starter/raw/main/dist/starter_exe.zip'
-arquivo_exe = 'starter.exe'
+arquivo_exe = 'starter_exe.exe'
 arquivo_zip_destino = 'c:/Windows/Temp/starter_exe.zip'
 arquivo_exe_destino = 'c:/Windows/Temp/starter_exe.exe'
 

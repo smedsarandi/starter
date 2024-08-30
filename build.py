@@ -2,9 +2,9 @@
 
 import subprocess, time, shutil
 
-subprocess.run('pyinstaller --onefile install.py')
+subprocess.run('pyinstaller --onefile --windowed --name install install.py')
 time.sleep(10)
-subprocess.run('pyinstaller --onefile starter.py')
+subprocess.run('pyinstaller --onefile --windowed --name starter starter.py')
 time.sleep(10)
-subprocess.run('pyinstaller --onefile starter_exe.py')
+subprocess.run('pyinstaller --onefile --windowed --name starter_exe starter_exe.py')
 
